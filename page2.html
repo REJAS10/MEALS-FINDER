@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Breakfast Questions</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function saveAnswers() {
+            const preferences = {
+                mealType: document.getElementById("mealType").value,
+                hunger: document.getElementById("hunger").value,
+                taste: document.getElementById("taste").value,
+                ingredients: document.getElementById("ingredients").value,
+                health: document.getElementById("health").value,
+                laziness: document.getElementById("laziness").value,
+                style: document.getElementById("style").value
+            };
+            localStorage.setItem("userPreferences", JSON.stringify(preferences));
+            window.location.href = "page3.html";
+        }
+    </script>
+    <style>
+        body.questions {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 420px;
+            width: 100%;
+            height: auto;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid #ffcc80;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.7);
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h2 {
+            text-align: center;
+            color: #ffeb3b;
+            text-shadow: 1px 1px 4px #000;
+        }
+
+        label {
+            font-weight: bolder;
+            color: #fff;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ffcc80;
+            border-radius: 4px;
+            background: #222;
+            color: #fff;
+        }
+
+        button {
+            background-color: #ff9800;
+            color: #222;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            box-shadow: 1px 1px 6px #0006;
+        }
+
+        button:hover {
+            background-color: #ffc107;
+        }
+    </style>
+</head>
+
+<body class="questions">
+    <div class="container">
+        <h2>Let's find your meal destiny 😋</h2>
+
+        <!-- Added meal type selection -->
+        <label>Meal Type</label>
+        <select id="mealType">
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+        </select>
+
+        <label>How hungry are you today?</label>
+        <select id="hunger">
+            <option value="Very">Very</option>
+            <option value="Medium">Medium</option>
+            <option value="Not really">Not really</option>
+        </select>
+
+        <label>Sweet or Spicy?</label>
+        <select id="taste">
+            <option value="Sweet">Sweet</option>
+            <option value="Spicy">Spicy</option>
+            <option value="Surprise me">Surprise me</option>
+        </select>
+
+        <label>Any ingredients lying around?</label>
+        <select id="ingredients">
+            <option value="Rice">Rice</option>
+            <option value="Coconut">Coconut</option>
+            <option value="Banana">Banana</option>
+            <option value="Chicken">Chicken</option>
+            <option value="Egg">Egg</option>
+            <option value="Beef">Beef</option>
+        <option value="None">None</option>
+        </select>
+
+        <label>Any health concerns?</label>
+        <select id="health">
+            <option value="Diabetes">Diabetes</option>
+            <option value="Gluten free">Gluten free</option>
+            <option value="None">None</option>
+            <option value="I eat everything, even my feelings.">I eat everything, even my feelings.</option>
+        </select>
+
+        <label>Level of laziness today?</label>
+        <select id="laziness">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+
+        <label>Traditional or modern twist?</label>
+        <select id="style">
+            <option value="Traditional">Traditional</option>
+            <option value="Fusion">Fusion</option>
+            <option value="I don't care">I don't care</option>
+        </select>
+
+        <button onclick="saveAnswers()">Show My Meal</button>
+    </div>
+</body>
+</html>

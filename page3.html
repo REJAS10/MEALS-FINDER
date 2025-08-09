@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Meal Destiny</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Baloo Bhai 2', cursive;
+      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+        url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #fff;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    img {
+      max-width: 50%;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      margin: 15px 0;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-top: 15px;
+      color: #ffd54f;
+      text-shadow: 1px 1px 3px #000;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      font-size: 1.1rem;
+      margin: 15px 0;
+      text-align: left;
+      display: inline-block;
+      color: #fff;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    ul li {
+      padding: 5px 0;
+    }
+
+    p.caption {
+      font-size: 1.2rem;
+      font-style: italic;
+      margin-top: 10px;
+      color: #ffe082;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 1.2rem;
+      background-color: #ff914d;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      color: #222;
+      margin-top: 15px;
+      transition: 0.3s;
+      font-weight: bold;
+      box-shadow: 1px 1px 6px #0006;
+    }
+
+    button:hover {
+      background-color: #ffc107;
+    }
+
+    .headning {
+      font-size: 2rem;
+      margin: 10px 0;
+      color: #3cabd3;
+      text-shadow: 1px 1px 2px #000;
+      font-weight: 900;
+    }
+
+    .no-match-message {
+      font-size: 1.5rem;
+      color: #ff4444;
+      margin-top: 20px;
+      text-shadow: 1px 1px 2px #000;
+    }
+    #foodImage {
+      transform:translateX(50%)
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h3 class="headning">🍽 Your <span id="mealTypeDisplay"></span> Destiny 🍛</h3>
+    <img id="foodImage" src="" alt="Meal Dish" style="display: none" />
+    <h2 id="foodName"></h2>
+    <h3 id="ingredientsTitle" style="display: none">Ingredients</h3>
+    <ul id="ingredientsList"></ul>
+    <p class="caption" id="funnyCaption"></p>
+    <p class="no-match-message" id="noMatchMessage" style="display: none">😢 No matches found for your preferences.</p>
+    <button onclick="generateMeal()">Mix Again</button>
+    <button id="tryNewBtn" onclick="location.href='page2.html'" style="display: none">Try New Ingredients</button>
+  </div>
+
+  <script>
+    const breakfastDishes = [
+      {
+        name: "Puttu + Kadala Curry",
+        img: "puttu.jpg",
+        ingredients: ["Rice", "Coconut", "Black chickpeas"],
+        taste: "Spicy",
+        style: "Traditional",
+        effort: "Medium",
+        health: ["Gluten free", "None"],
+        caption: "A classic Malabar breakfast combo that's both hearty and delicious!"
+      },
+      {
+        name: "Banana Fry + Tea",
+        img: "Tea.jpg",
+        ingredients: ["Banana", "Sugar"],
+        taste: "Sweet",
+        style: "Fusion",
+        effort: "Low",
+        health: ["Diabetes"],
+        caption: "A sweet and simple breakfast to start your day!"
+      },
+      {
+        name: "Pathiri + Chicken Curry",
+        img: "pathiri.jpg",
+        ingredients: ["Rice", "Chicken"],
+        taste: "Spicy",
+        style: "Traditional",
+        effort: "High",
+        health: ["None"],
+        caption: "Soft pathiri with flavorful chicken curry - worth the effort!"
+      },
+      {
+        name: "Appam + Egg Curry",
+        img: "Dosutta.jpg",
+        ingredients: ["Rice", "Coconut", "Egg"],
+        taste: "Spicy",
+        style: "Traditional",
+        effort: "Medium",
+        health: ["Gluten free"],
+        caption: "Soft appam with spicy egg curry - a perfect match!"
+      }
+    ];
+
+    const lunchDishes = [
+      {
+        name: "Malabar Biryani",
+        img: "biriyani.jpg",
+        ingredients: ["Rice", "Chicken", "Spices"],
+        taste: "Spicy",
+        style: "Traditional",
+        effort: "High",
+        health: ["None"],
+        caption: "Flavorful Malabar-style biryani that's worth the wait!"
+      },
+      {
+        name: "Meals",
+        img: "meals.jpeg",
+        ingredients: ["Rice", "Coconut", "Mixed vegetables"],
+        taste: "Spicy",
+        style: "Traditional",
+        effort: "Medium",
+        health: ["Gluten free"],
+        caption: "Light and flavorful lunch option!"
+      }
+    ];
+
+    const lazinessMap = {
+      "Low": ["High", "Medium", "Low"],
+      "Medium": ["Medium", "Low"],
+      "High": ["Low"]
+    };
+
+    function generateMeal() {
+      const prefs = JSON.parse(localStorage.getItem("userPreferences"));
+      console.log("User Preferences:", prefs);
+
+      const imgEl = document.getElementById("foodImage");
+      const titleEl = document.getElementById("ingredientsTitle");
+      const noMatchMsg = document.getElementById("noMatchMessage");
+      const tryNewBtn = document.getElementById("tryNewBtn");
+
+      // Hide old result
+      imgEl.style.display = "none";
+      titleEl.style.display = "none";
+      noMatchMsg.style.display = "none";
+      tryNewBtn.style.display = "none";
+
+      if (!prefs) {
+        alert("Preferences not found in localStorage.");
+        return;
+      }
+
+      const dishList = prefs.mealType === "Lunch" ? lunchDishes : breakfastDishes;
+      document.getElementById("mealTypeDisplay").textContent = prefs.mealType;
+
+      // Normalize ingredients to array
+      let selectedIngredients = [];
+      if (typeof prefs.ingredients === "string") {
+        if (prefs.ingredients === "None" || prefs.ingredients.trim() === "") {
+          selectedIngredients = [];
+        } else {
+          selectedIngredients = [prefs.ingredients];
+        }
+      } else if (Array.isArray(prefs.ingredients)) {
+        selectedIngredients = prefs.ingredients;
+      }
+
+      let filtered = dishList.filter(dish => {
+        const tasteOk = prefs.taste === "Surprise me" || dish.taste === prefs.taste;
+        const styleOk = prefs.style === "I don't care" || dish.style === prefs.style;
+
+        // Health filter
+        let healthOk = true;
+        if (prefs.health === "I eat everything, even my feelings.") {
+          healthOk = true;
+        } else if (prefs.health === "Diabetes") {
+          healthOk = !dish.health.includes("Diabetes");
+        } else {
+          healthOk = dish.health.includes(prefs.health);
+        }
+
+        const lazinessOk = lazinessMap[prefs.laziness]?.includes(dish.effort) ?? true;
+        const ingredientsOk = selectedIngredients.length === 0 || selectedIngredients.every(ing => dish.ingredients.includes(ing));
+
+        return tasteOk && styleOk && healthOk && lazinessOk && ingredientsOk;
+      });
+
+      if (filtered.length === 0) {
+        console.warn("No perfect matches found.");
+        document.getElementById("foodName").textContent = "";
+        document.getElementById("ingredientsList").innerHTML = "";
+        document.getElementById("funnyCaption").textContent = "";
+        noMatchMsg.style.display = "block";
+        tryNewBtn.style.display = "inline-block";
+        return;
+      }
+
+      const pick = filtered[Math.floor(Math.random() * filtered.length)];
+
+      imgEl.src = pick.img;
+      imgEl.style.display = "block";
+      titleEl.style.display = "block";
+
+      document.getElementById("foodName").textContent = pick.name;
+
+      const list = document.getElementById("ingredientsList");
+      list.innerHTML = "";
+      pick.ingredients.forEach(ing => {
+        const li = document.createElement("li");
+        li.textContent = ing;
+        list.appendChild(li);
+      });
+
+      document.getElementById("funnyCaption").textContent = pick.caption;
+    }
+
+    // Load on start
+    generateMeal();
+  </script>
+</body>
+
+</html>

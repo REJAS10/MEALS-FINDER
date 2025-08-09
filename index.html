@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Breakfast Mixer</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body.home {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 420px;
+            width: 100%;
+            height: auto;
+            margin: 100px auto;
+            padding: 20px;
+            border: 1px solid #ffcc80;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.7);
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ffeb3b;
+            text-shadow: 1px 1px 4px #000;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 1px 1px 2px #000;
+            margin-bottom: 30px;
+        }
+
+        button {
+            background-color: #ff9800;
+            color: #222;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            box-shadow: 1px 1px 6px #0006;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #ffc107;
+        }
+    </style>
+</head>
+
+<body class="home">
+    <div class="container">
+        <h1>🥞 Welcome to the Breakfast Mixer 🍛</h1>
+        <p>"Skip the stress, pick your breakfast!"</p>
+        <button onclick="window.location.href='page2.html'">Mix My Breakfast!</button>
+    </div>
+</body>
+
+</html>
