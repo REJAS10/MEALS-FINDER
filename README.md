@@ -55,13 +55,13 @@ open index.html    # For Mac]
 For Software:
 
 # Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
+![Screenshot1](Add screenshot 1 here with proper)
 *Add caption explaining what this shows*
 
 ![Screenshot2](Add screenshot 2 here with proper name)
 *Add caption explaining what this shows*
 
-![Screenshot3](Add screenshot 3 here with proper name)
+![Screenshot3](image1.png)
 *Add caption explaining what this shows*
 
 # Diagrams
